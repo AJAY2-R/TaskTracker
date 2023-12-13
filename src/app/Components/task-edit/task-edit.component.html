@@ -1,0 +1,39 @@
+<div class="overlay">
+    <div class="cus-modal col-md-5">
+        <div class="container">
+            <div class="card p-3 ">
+                <div class="row">
+                    <h2 class="text-center wheat">Edit Task</h2>
+                </div>
+                
+                <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" formControlName="title">
+                    <div *ngIf="editForm.get('title')?.hasError('required') && (editForm.get('title')?.touched || submit)" class="text-danger">
+                        Title is required.
+                    </div>
+
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" formControlName="description" class="form-control"></textarea>
+                    <div *ngIf="editForm.get('description')?.hasError('required') && (editForm.get('description')?.touched || submit)" class="text-danger">
+                        Description is required.
+                    </div>
+
+                    <label for="assigneeId">Assignee</label>
+                    <input type="text" id="assigneeId" name="assigneeId" class="form-control" formControlName="assigneeId" list="assignees" #keyword (keypress)="searchUser()">
+                    <datalist id="assignees">
+                        <option *ngFor="let user of users" [value]="user.username">{{ user.name }}</option>
+                    </datalist>
+                    <div *ngIf="editForm.get('assigneeId')?.hasError('required') && (editForm.get('assigneeId')?.touched || submit)" class="text-danger">
+                        Assignee is required.
+                    </div>
+                    <div class="col-6 offset-4 mt-3">
+                        <input type="submit" class="btn wheat text-center" value="Update">
+                        &nbsp;
+                        <button type="button" class="btn" (click)="onCancel()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header bg-warning text-white">
+            To do
+          </div>
+          <div class="card-body" (dragover)="onDragOver($event)" (drop)="onDrop($event,status.Assigned)">
+            <ng-container *ngFor="let task of tasks">
+              <div *ngIf="task.status === status.Assigned" class="card mb-2">
+                <div class="card-body" draggable="true" (dragstart)="onDragStart(task)">
+                  {{ task.title }}
+                </div>
+                <button type="button" class="btn btn-outline-secondary btn-sm details-button" (click)="onStart(task)">
+                  Show
+                </button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header bg-info text-white">
+            In progress
+          </div>
+          <div class="card-body" (dragover)="onDragOver($event)" (drop)="onDrop($event,status.InProgress)">
+            <ng-container *ngFor="let task of tasks">
+              <div *ngIf="task.status === status.InProgress" class="card mb-2">
+                <div class="card-body" draggable="true" (dragstart)="onDragStart(task)">
+                  {{ task.title }}
+                </div>
+                <button type="button" class="btn btn-outline-secondary btn-sm details-button" (click)="onStart(task)">
+                  Show
+                </button>
+              </div>
+            </ng-container>
+          </div>          
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header bg-success text-white">
+            Completed
+          </div>
+          <div class="card-body" (dragover)="onDragOver($event)" (drop)="onDrop($event,status.Completed)">
+            <ng-container *ngFor="let task of tasks">
+              <div *ngIf="task.status === status.Completed" class="card mb-2">
+                <div class="card-body" draggable="true" (dragstart)="onDragStart(task)">
+                  {{ task.title }}
+                </div>
+                <button type="button" class="btn btn-outline-secondary btn-sm details-button" (click)="onStart(task)">
+                  Show
+                </button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-task-details *ngIf="modalStatus" [task]="selectedTask" (closeModalEvent)="closeModal()"></app-task-details>

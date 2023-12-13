@@ -1,0 +1,25 @@
+<div class="container d-flex align-items-center justify-content-center mt-5">
+    <div class="card col-md-5 p-3">
+        <div class="col-md-12 wheat">
+            <h3 class="text-center">LOGIN</h3>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mt-2">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" formControlName="username">
+                <div class="small text-danger " *ngIf="loginForm.get('username')?.hasError('required') && (loginForm.get('username')?.touched || loginForm.get('username')?.dirty  || submited)">Username required</div>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password">
+                <div class="small text-danger" *ngIf="loginForm.get('password')?.hasError('required') && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty || submited)">password required</div>
+            </div>
+
+            <div class="div offset-4 p-2 mt-2">
+                <input type="submit" class="btn wheat col-md-5" value="Login">
+            </div>
+        </form>
+        <a class="link-info" routerLink="/Register">New member? Register</a>
+    </div>
+</div>

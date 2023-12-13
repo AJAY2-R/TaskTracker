@@ -1,0 +1,29 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card col-md-5 p-3 mt-5">
+        <div class="row">
+            <h2 class="text-center wheat">Assign Task</h2>
+        </div>
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="form-group" >
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" class="form-control" formControlName="title">
+            <div *ngIf="taskForm.get('title')?.hasError('required') &&( taskForm.get('title')?.touched || submit)" class="text-danger">
+                Title is required.
+            </div>
+
+            <label for="description">Description</label>
+            <textarea name="description" id="description" formControlName="description" class="form-control"></textarea>
+            <div *ngIf="taskForm.get('description')?.hasError('required') &&( taskForm.get('description')?.touched || submit)" class="text-danger">
+                Description is required.
+            </div>
+            <label for="assignee">Assignee</label>
+            <input type="text" id="assignee" name="assignee" class="form-control" formControlName="assigneeId" list="assignees" (keypress)="searchUser()" (blur)="findId()">
+            <datalist id="assignees">
+                <option *ngFor="let user of users" value="{{user.username}}">{{ user.name }}</option>
+            </datalist>
+            <div *ngIf="taskForm.get('assigneeId')?.hasError('required') && (taskForm.get('assigneeId')?.touched || submit)" class="text-danger">
+                Assignee is required.
+            </div>
+            <input type="submit" value="Submit" class="btn wheat mt-2 col-md-4 offset-4">
+        </form>
+    </div>
+</div>
