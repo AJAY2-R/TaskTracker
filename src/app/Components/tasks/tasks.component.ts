@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskDetails, TaskEdit, TaskStatus } from 'src/app/Models/model';
 import { ApiService } from 'src/app/Services/api.service';
@@ -14,6 +14,7 @@ export class TasksComponent implements OnInit {
   tasks:TaskDetails[]=[];
   status=TaskStatus;
   userId!:number;
+  apiService =inject(ApiService)
   constructor( private api:ApiService,private userService:TokenService) { }
 
 

@@ -8,7 +8,7 @@ import {UserNotifications}  from 'src/app/Models/model';
     selector: 'app-chat',
     template:` <div class="notification-dropdown ml-auto" ngbDropdown>
                     <button class="nav-link" id="notificationDropdown" ngbDropdownToggle>
-                    <i class="fas fa-bell"></i> Notifications
+                    <i class="fas fa-bell"></i> Notifications{{messages.length}}
                     </button>
                         <div class="dropdown-menu" aria-labelledby="notificationDropdown" ngbDropdownMenu>
                             <div class="dropdown-item notification-item"  *ngFor="let message of messages">
